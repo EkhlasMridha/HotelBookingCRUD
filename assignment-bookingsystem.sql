@@ -3,8 +3,8 @@ CREATE TABLE IF NOT EXISTS `BookingDetails`(
     
 	`BookedFrom` datetime not null,
     `LeaveAt` datetime not null,
+    `BookedBy` BIGINT not null,
     `Comments` varchar(300) null,
-    `State` int not null,
     
     `CreatedAt` DATETIME NOT NULL,
     `UpdatedAt` datetime NULL,
@@ -35,13 +35,13 @@ CREATE TABLE IF NOT EXISTS `Bookings`(
     `UpdatedAt` datetime NULL,
     
     primary key (`Id`),
-	FOREIGN KEY(`BookingId`) REFERENCES `BookingDetails` (`Id`)  ON DELETE CASCADE ON UPDATE NO ACTION
+	FOREIGN KEY(`BookingId`) REFERENCES `BookingDetails` (`Id`)  ON DELETE CASCADE ON UPDATE NO ACTION,
+    FOREIGN KEY(`RoomId`) REFERENCES `Rooms` (`Id`)  ON DELETE CASCADE ON UPDATE NO ACTION
 );
 
 CREATE TABLE IF NOT EXISTS `Guests`(
 	`Id` BIGINT NOT NULL AUTO_INCREMENT,
     
-	`BookingId` BIGINT NULL,
     `Name` varchar(250) NOT NULL,
     `Age` int NOT NULL,
     `ContactNumber` varchar(250) NULL,
@@ -49,8 +49,7 @@ CREATE TABLE IF NOT EXISTS `Guests`(
     `CreatedAt` DATETIME NOT NULL,
     `UpdatedAt` datetime NULL,
     
-    primary key (`Id`),
-    FOREIGN KEY(`BookingId`) REFERENCES `BookingDetails` (`Id`)  ON DELETE CASCADE ON UPDATE NO ACTION
+    primary key (`Id`)
 );
 
 CREATE TABLE IF NOT EXISTS `BookingSettings`(

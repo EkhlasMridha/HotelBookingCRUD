@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CoreModel.Entities.Bookings;
 using Persistence.Contracts;
 using Service.HotelServices.Contracts;
+using Persistence;
 
 namespace Service.HotelServices
 {
@@ -16,5 +17,10 @@ namespace Service.HotelServices
         {
             _unitOfWork = unitOfWork;
         }
+
+        //public Task<List<RoomStatusViewModel>> GetRoomDataList()
+        //{
+            
+        //}
     }
 }

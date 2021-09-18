@@ -55,6 +55,13 @@ namespace Service.HotelServices
                 _unitOfWork?.Dispose();
             }
         }
+
+        public async Task<T> UpdateAsync(T type)
+        {
+            await Task.Run(() => _unitOfWork.Repository<T>().Update(type));
+            await _unitOfWork.SaveChangesAsync();
+            return type;
+        }
         #endregion
     }
 }

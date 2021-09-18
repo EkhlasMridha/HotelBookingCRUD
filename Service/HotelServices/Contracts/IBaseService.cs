@@ -9,6 +9,7 @@ namespace Service.HotelServices.Contracts
     public interface IBaseService<T> where T:class
     {
         public Task<T> CreateAsync(T type);
+        public Task<T> UpdateAsync(T type);
         public Task<T> GetASync(long id);
         public Task<IEnumerable<T>> GetAllAsync();
 

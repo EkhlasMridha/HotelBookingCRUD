@@ -3,6 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HotelBooking.Dtos.Command;
+using AutoMapper;
+using CoreModel.Entities.Bookings;
+using Service.HotelServices.Contracts;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,6 +16,13 @@ namespace HotelBooking.Controllers
     [ApiController]
     public class BookingController : ControllerBase
     {
+        private IBookingService _bookingService;
+        private IMapper _mapper;
+        public BookingController(IBookingService bookingService, IMapper mapper)
+        {
+            _bookingService = bookingService;
+            _mapper = mapper;
+        }
         // GET: api/<BookingController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -28,9 +39,11 @@ namespace HotelBooking.Controllers
 
         // POST api/<BookingController>
         [HttpPost]
-        public void CreateBooking([FromBody] string value)
+        public async Task<IActionResult> CreateBooking([FromBody] CreateBooking createBooking)
         {
-
+            var booking = _mapper.Map<BookingDetails>(createBooking);
+            var result = await _bookingService.CreateBookingDataAsync(booking, createBooking.RoomId);
+            return Ok(result);
         }
 
         // PUT api/<BookingController>/5

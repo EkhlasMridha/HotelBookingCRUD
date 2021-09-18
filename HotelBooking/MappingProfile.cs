@@ -15,6 +15,9 @@ namespace HotelBooking
         public MappingProfile()
         {
             CreateMap<RoomCreate, Room>();
+            CreateMap<SettingCommand, BookingSetting>();
+            CreateMap<CreateGuest, Guest>();
+            CreateMap<CreateBooking, BookingDetails>();
         }
     }
 }

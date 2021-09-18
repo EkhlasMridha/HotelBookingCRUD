@@ -78,7 +78,15 @@ namespace Persistence.Repository
         }
         public async Task SaveChangesAsync()
         {
-            await _dbContext.SaveChangesAsync();
+            try
+            {
+                await _dbContext.SaveChangesAsync();
+            }catch(Exception e)
+            {
+                var ex = e;
+                throw;
+            }
+            
         }
     }
 }

@@ -14,14 +14,5 @@ namespace CoreModel.Entities.Bookings
         public virtual DateTime LeaveAt { get; set; }
         public virtual long BookedBy { get; set; }
         public virtual string Comments { get; set; }
-        public virtual StateEnum State { get; set; }
-    }
-
-    public enum StateEnum
-    {
-        [EnumMember,Description("Pending")]
-        Pending=1,
-        [EnumMember, Description("Booked")]
-        Booked = 2
     }
 }

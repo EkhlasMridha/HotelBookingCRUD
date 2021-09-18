@@ -17,6 +17,8 @@ namespace Service
         {
             services.AddScoped<IBookingService, BookingService>();
             services.AddScoped<IRoomService, RoomService>();
+            services.AddScoped<ISettingService, SettingService>();
+            services.AddScoped<IGuestService, GuestService>();
         }
     }
 }

@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CoreModel.Entities.Bookings;
+using CoreModel.Entities.Settings;
 
 namespace Service.HotelServices.Contracts
 {
-    public interface IRoomService : IBaseService<Room>
+    public interface ISettingService : IBaseService<BookingSetting>
     {
-        public Task<List<RoomStatusViewModel>> GetRoomDataList();
     }
 }
