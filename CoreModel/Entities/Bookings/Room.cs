@@ -12,6 +12,6 @@ namespace CoreModel.Entities.Bookings
     {
         public virtual string RoomNumber { get; set; }
         public virtual int Capacity { get; set; }
-        public virtual int Rent { get; set; }
+        public virtual decimal Rent { get; set; }
     }
 }

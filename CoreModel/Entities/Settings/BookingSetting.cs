@@ -8,7 +8,7 @@ namespace CoreModel.Entities.Settings
 {
     public class BookingSetting : BaseEntity
     {
-        public virtual int Discount { get; set; }
-        public virtual int TaxPercentage { get; set; }
+        public virtual decimal Discount { get; set; }
+        public virtual decimal TaxPercentage { get; set; }
     }
 }

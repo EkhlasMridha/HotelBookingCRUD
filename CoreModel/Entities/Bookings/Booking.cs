@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace CoreModel.Entities.Bookings
 {
-    class Booking
+    public class Booking : BaseEntity
     {
+        public virtual long BookingId { get; set; }
+        public virtual long RoomId { get; set; }
     }
 }

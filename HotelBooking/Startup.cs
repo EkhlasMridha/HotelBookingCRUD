@@ -10,6 +10,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using Service;
+using Persistence;
 
 namespace HotelBooking
 {
@@ -27,6 +30,11 @@ namespace HotelBooking
         {
 
             services.AddControllers();
+
+            services.Addservices();
+            services.AddDbRepository(Configuration);
+
+            services.AddAutoMapper(typeof(Startup));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HotelBooking", Version = "v1" });
