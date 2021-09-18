@@ -7,6 +7,8 @@ using CoreModel.Entities.Bookings;
 using Persistence.Contracts;
 using Service.HotelServices.Contracts;
 using Persistence;
+using System.Data.SqlClient;
+using Service.Extensions;
 
 namespace Service.HotelServices
 {
@@ -18,9 +20,14 @@ namespace Service.HotelServices
             _unitOfWork = unitOfWork;
         }
 
-        //public Task<List<RoomStatusViewModel>> GetRoomDataList()
-        //{
-            
-        //}
+        public async Task<List<RoomStatusViewModel>> GetRoomDataList()
+        {
+            string spName = "sp_get_roominfolist";
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            var data = await _unitOfWork.Repository<BookingDetails>().ExecuteSqlDataReader(spName, parameters);
+
+            var result = data.ConvertToList<RoomStatusViewModel>();
+            return result;
+        }
     }
 }

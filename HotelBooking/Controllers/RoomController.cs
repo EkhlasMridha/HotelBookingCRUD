@@ -41,7 +41,7 @@ namespace HotelBooking.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllRooms()
         {
-            var result = await Task.Run(() => _roomService.GetAllAsQueryable().OrderByDescending(a => a.CreatedAt).ToList());
+            var result = await _roomService.GetRoomDataList();
             return Ok(result);
         }
 

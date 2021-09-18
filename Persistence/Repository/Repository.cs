@@ -101,14 +101,19 @@ namespace Persistence.Repository
                 var command = connection.CreateCommand();
                 command.CommandText = name;
                 command.CommandType = CommandType.StoredProcedure;
-                var spParam = command.CreateParameter();
 
-                foreach (var param in sqlParameters)
+                if(sqlParameters.Count != 0)
                 {
-                    spParam.ParameterName = param.ParameterName;
-                    spParam.Value = param.Value;
+                    var spParam = command.CreateParameter();
+
+                    foreach (var param in sqlParameters)
+                    {
+                        spParam.ParameterName = param.ParameterName;
+                        spParam.Value = param.Value;
+                    }
+                    command.Parameters.Add(spParam);
                 }
-                command.Parameters.Add(spParam);
+                
 
                 using (var reader = await command.ExecuteReaderAsync())
                 {

@@ -8,10 +8,11 @@ namespace CoreModel.Entities.Bookings
 {
     public class RoomStatusViewModel
     {
+        public long Id { get; set; }
         public virtual string RoomNumber { get; set; }
         public virtual int Capacity { get; set; }
         public virtual decimal Rent { get; set; }
-        public virtual int OnGoingBooking{ get; set; }
-        public virtual int ClosedBooking { get; set; }
+        public virtual long OnGoingBooking{ get; set; }
+        public virtual long ClosedBooking { get; set; }
     }
 }
