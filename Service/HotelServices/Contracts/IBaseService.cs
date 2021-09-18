@@ -8,10 +8,10 @@ namespace Service.HotelServices.Contracts
 {
     public interface IBaseService<T> where T:class
     {
-        public Task<Type> CreateAsync(Type type);
-        public Task<Type> GetASync(long id);
-        public Task<IEnumerable<Type>> GetAllAsync();
+        public Task<T> CreateAsync(T type);
+        public Task<T> GetASync(long id);
+        public Task<IEnumerable<T>> GetAllAsync();
 
-        public IQueryable<Type> GetAllAsQueryable();
+        public IQueryable<T> GetAllAsQueryable();
     }
 }

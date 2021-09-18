@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS `BookingDetails`(
     `Comments` varchar(300) null,
     `State` int not null,
     
-    `CreatedaAt` DATETIME NOT NULL,
+    `CreatedAt` DATETIME NOT NULL,
     `UpdatedAt` datetime NULL,
     
     PRIMARY KEY (`Id`)
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `Rooms`(
     `Capacity` int not null,
     `Rent` decimal not null,
     
-    `CreatedaAt` DATETIME NOT NULL,
+    `CreatedAt` DATETIME NOT NULL,
     `UpdatedAt` datetime NULL,
     
     primary key (`Id`)
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `Bookings`(
 	`BookingId` BIGINT NOT NULL,
     `RoomId` BIGINT NOT NULL,
     
-    `CreatedaAt` DATETIME NOT NULL,
+    `CreatedAt` DATETIME NOT NULL,
     `UpdatedAt` datetime NULL,
     
     primary key (`Id`),
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `Guests`(
     `Age` int NOT NULL,
     `ContactNumber` varchar(250) NULL,
     
-    `CreatedaAt` DATETIME NOT NULL,
+    `CreatedAt` DATETIME NOT NULL,
     `UpdatedAt` datetime NULL,
     
     primary key (`Id`),
@@ -59,8 +59,10 @@ CREATE TABLE IF NOT EXISTS `BookingSettings`(
 	`Discount` decimal NULL,
     `TaxPercentage` decimal NULL,
     
-    `CreatedaAt` DATETIME NOT NULL,
+    `CreatedAt` DATETIME NOT NULL,
     `UpdatedAt` datetime NULL,
     
     primary key (`Id`)
 );
+
+CREATE UNIQUE INDEX KEY_INDEX ON `Rooms` (`RoomNumber`);

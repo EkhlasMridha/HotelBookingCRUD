@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "..\Persisten
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreModel", "..\CoreModel\CoreModel.csproj", "{5EEB272D-DEC3-4996-849C-4BDD7EE6B0AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "..\Service\Service.csproj", "{3057C3D6-3B0B-4455-B3DC-77FA0C73F20F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "..\Service\Service.csproj", "{3057C3D6-3B0B-4455-B3DC-77FA0C73F20F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthorizationService", "..\AuthorizationService\AuthorizationService.csproj", "{97932F03-45A8-4807-9E7F-E7555AE00D66}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{3057C3D6-3B0B-4455-B3DC-77FA0C73F20F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3057C3D6-3B0B-4455-B3DC-77FA0C73F20F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3057C3D6-3B0B-4455-B3DC-77FA0C73F20F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97932F03-45A8-4807-9E7F-E7555AE00D66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97932F03-45A8-4807-9E7F-E7555AE00D66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97932F03-45A8-4807-9E7F-E7555AE00D66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97932F03-45A8-4807-9E7F-E7555AE00D66}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

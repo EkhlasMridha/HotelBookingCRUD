@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Service;
 using Persistence;
+using AuthorizationService;
+using HotelBooking.ExceptionHandler;
 
 namespace HotelBooking
 {
@@ -33,7 +35,8 @@ namespace HotelBooking
 
             services.Addservices();
             services.AddDbRepository(Configuration);
-
+            
+            services.AddCorsPolicy(Configuration);
             services.AddAutoMapper(typeof(Startup));
             services.AddSwaggerGen(c =>
             {
@@ -50,8 +53,9 @@ namespace HotelBooking
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "HotelBooking v1"));
             }
-
+            app.UseCustomExceptionHandler();
             app.UseRouting();
+            app.UseCustomCors();
 
             app.UseAuthorization();
 

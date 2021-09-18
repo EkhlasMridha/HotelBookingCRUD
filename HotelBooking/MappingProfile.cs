@@ -6,6 +6,7 @@ using AutoMapper;
 using CoreModel.Entities.Bookings;
 using CoreModel.Entities.Guests;
 using CoreModel.Entities.Settings;
+using HotelBooking.Dtos.Command;
 
 namespace HotelBooking
 {
@@ -13,7 +14,7 @@ namespace HotelBooking
     {
         public MappingProfile()
         {
-
+            CreateMap<RoomCreate, Room>();
         }
     }
 }

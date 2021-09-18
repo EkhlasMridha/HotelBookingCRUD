@@ -17,28 +17,28 @@ namespace Service.HotelServices
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Type> CreateAsync(Type type)
+        public async Task<T> CreateAsync(T type)
         {
-            await _unitOfWork.Repository<Type>().InsertAsync(type);
+            await _unitOfWork.Repository<T>().InsertAsync(type);
             await _unitOfWork.SaveChangesAsync();
-            return type;
+            return type;  
         }
 
-        public async Task<Type> GetASync(long id)
+        public async Task<T> GetASync(long id)
         {
-            var result = await _unitOfWork.Repository<Type>().GetByIdAsync(id);
+            var result = await _unitOfWork.Repository<T>().GetByIdAsync(id);
             return result;
         }
 
-        public async Task<IEnumerable<Type>> GetAllAsync()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
-            var result = await _unitOfWork.Repository<Type>().GetAllAsync();
+            var result = await _unitOfWork.Repository<T>().GetAllAsync();
             return result;
         }
 
-        public IQueryable<Type> GetAllAsQueryable()
+        public IQueryable<T> GetAllAsQueryable()
         {
-            return _unitOfWork.Repository<Type>().AsQueryable();
+            return _unitOfWork.Repository<T>().AsQueryable();
         }
 
         #region dispose
@@ -55,5 +55,6 @@ namespace Service.HotelServices
                 _unitOfWork?.Dispose();
             }
         }
+        #endregion
     }
 }

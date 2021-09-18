@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using CoreModel.Entities;
 
 namespace Service.Extensions
 {
     public static class Paginator
     {
-        public static async Task<PaginatedData<TDocument>> ToPagedListAsync<TDocument>(this IQueryable<TDocument> source,int pageNumber, int pageSize, Expression<Func<TDocument, bool>> sortQuery)
+        public static async Task<PaginatedData<TDocument>> ToPagedListAsync<TDocument>(this IQueryable<TDocument> source,int pageNumber, int pageSize, Expression<Func<TDocument, dynamic>> sortQuery) where TDocument : class
         {
             var result = await source.Skip((pageNumber - 1) * pageSize).OrderBy(sortQuery).Take(pageSize).ToListAsync();
             int total = source.Count();
