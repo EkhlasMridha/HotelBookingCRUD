@@ -10,5 +10,6 @@ namespace Service.HotelServices.Contracts
     public interface IRoomService : IBaseService<Room>
     {
         public Task<List<RoomStatusViewModel>> GetRoomDataList();
+        public Task<List<RoomDetailViewModel>> RoomDetailView(long roomId);
     }
 }

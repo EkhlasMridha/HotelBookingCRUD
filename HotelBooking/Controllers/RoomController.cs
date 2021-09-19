@@ -38,8 +38,15 @@ namespace HotelBooking.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
+        [HttpGet("all")]
         public async Task<IActionResult> GetAllRooms()
+        {
+            var result = await _roomService.GetAllAsync();
+            return Ok(result);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllRoomsStatus()
         {
             var result = await _roomService.GetRoomDataList();
             return Ok(result);
@@ -47,9 +54,17 @@ namespace HotelBooking.Controllers
 
         // GET api/<RoomController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> GetRoom(long id)
         {
-            return "value";
+            var result = await _roomService.GetASync(id);
+            return Ok(result);
+        }
+
+        [HttpGet("roominfo/{id}")]
+        public async Task<IActionResult> GetRoomInfo(long id)
+        {
+            var result = await _roomService.RoomDetailView(id);
+            return Ok(result);
         }
 
         // POST api/<RoomController>

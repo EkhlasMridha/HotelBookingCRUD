@@ -25,3 +25,17 @@ BEGIN
     order by bd.CreatedAt desc;
 END$$
 DELIMITER ;
+
+DROP procedure IF EXISTS `sp_get_room_bookinginfo`;
+DELIMITER $$
+CREATE PROCEDURE `sp_get_room_bookinginfo`(in room_id bigint)
+BEGIN
+	SELECT bkd.BookedFrom, bkd.LeaveAt, bkd.PaidAmount, bkd.Comments, rm.Rent RoomRent
+    FROM `Rooms` rm
+    LEFT JOIN `Bookings` bk ON bk.RoomId = rm.Id
+    left join `BookingDetails` bkd on bkd.Id = bk.BookingId
+    left join `Guests` gt on gt.Id = bkd.BookedBy
+    where rm.Id = room_id
+    order by rm.Rent asc;
+END$$
+DELIMITER ;

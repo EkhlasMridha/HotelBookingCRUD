@@ -49,8 +49,12 @@ namespace HotelBooking.Controllers
 
         // PUT api/<BookingController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> UpdateBooking(long id, [FromBody] CreateBooking createBooking)
         {
+
+            var booking = _mapper.Map<BookingViewModel>(createBooking);
+            await _bookingService.UpdateBookingAsync(booking, id);
+            return Ok(booking);
         }
 
         // DELETE api/<BookingController>/5

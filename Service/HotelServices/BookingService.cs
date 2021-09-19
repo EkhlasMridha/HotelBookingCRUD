@@ -58,5 +58,34 @@ namespace Service.HotelServices
                 throw;
             }
         }
+
+        public async Task UpdateBookingAsync(BookingViewModel bookingView, long prevRoom)
+        {
+            try
+            {
+                
+
+                await _unitOfWork.BeginTransactionAsync();
+
+                var booking = await GetASync(bookingView.Id);
+                booking.BookedBy = bookingView.BookedBy;
+                booking.BookedFrom = bookingView.BookedFrom;
+                booking.LeaveAt = bookingView.LeaveAt;
+                booking.PaidAmount = bookingView.PaidAmount;
+                booking.Comments = bookingView.Comments;
+                await UpdateAsync(booking);
+                var bookingLink = _unitOfWork.Repository<Booking>().AsQueryable().FirstOrDefault(a => a.BookingId == bookingView.Id && a.RoomId == prevRoom);
+                bookingLink.RoomId = bookingView.RoomId;
+                _unitOfWork.Repository<Booking>().Update(bookingLink);
+
+                await _unitOfWork.SaveChangesAsync();
+                await _unitOfWork.CommitAsync();
+            }catch(Exception e)
+            {
+                await _unitOfWork.RollbackASync();
+                var ex = e;
+                throw;
+            }
+        }
     }
 }

@@ -18,6 +18,7 @@ namespace HotelBooking
             CreateMap<SettingCommand, BookingSetting>();
             CreateMap<CreateGuest, Guest>();
             CreateMap<CreateBooking, BookingDetails>();
+            CreateMap<CreateBooking, BookingViewModel>();
         }
     }
 }

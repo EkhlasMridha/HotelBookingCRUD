@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelBooking.Dtos.Command
+namespace CoreModel.Entities.Bookings
 {
-    public class CreateBooking
+    public class RoomDetailViewModel
     {
-        public long Id { get; set; }
         public DateTime BookedFrom { get; set; }
         public DateTime LeaveAt { get; set; }
-        public decimal? PaidAmount { get; set; }
-        public long BookedBy { get; set; }
-        public long RoomId { get; set; }
+        public decimal PaidAmount { get; set; }
         public string Comments { get; set; }
+        public decimal RoomRent { get; set; }
+        public string BookedBy { get; set; }
     }
 }

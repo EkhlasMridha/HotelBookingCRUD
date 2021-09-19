@@ -29,5 +29,17 @@ namespace Service.HotelServices
             var result = data.ConvertToList<RoomStatusViewModel>();
             return result;
         }
+
+        public async Task<List<RoomDetailViewModel>> RoomDetailView(long roomId)
+        {
+            string spName = "sp_get_room_bookinginfo";
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("room_id", roomId));
+
+            var data = await _unitOfWork.Repository<Room>().ExecuteSqlDataReader(spName, parameters);
+            var result = data.ConvertToList<RoomDetailViewModel>();
+
+            return result;
+        }
     }
 }

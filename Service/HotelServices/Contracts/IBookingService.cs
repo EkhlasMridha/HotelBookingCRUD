@@ -11,5 +11,7 @@ namespace Service.HotelServices.Contracts
     {
         public Task<BookingDetails> CreateBookingDataAsync(BookingDetails bookingDetails, long roomId);
         public Task<List<BookingViewModel>> GetAllBookings();
+
+        public Task UpdateBookingAsync(BookingViewModel booking, long prevRoom);
     }
 }
