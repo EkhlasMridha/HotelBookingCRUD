@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Service.HotelServices.Contracts;
 using CoreModel.Entities.Bookings;
 using Persistence.Contracts;
+using System.Data.SqlClient;
+using Service.Extensions;
 
 namespace Service.HotelServices
 {
@@ -39,6 +41,22 @@ namespace Service.HotelServices
                 throw;
             }
             
+        }
+
+        public async Task<List<BookingViewModel>> GetAllBookings()
+        {
+            try
+            {
+                string spName = "sp_get_bookingdetails";
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                var data = await _unitOfWork.Repository<BookingDetails>().ExecuteSqlDataReader(spName, parameters);
+                var result = data.ConvertToList<BookingViewModel>();
+                return result;
+            }catch(Exception e)
+            {
+                var ex = e;
+                throw;
+            }
         }
     }
 }

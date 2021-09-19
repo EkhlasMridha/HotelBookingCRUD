@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS `BookingDetails`(
 	`BookedFrom` datetime not null,
     `LeaveAt` datetime not null,
     `BookedBy` BIGINT not null,
+    `PaidAmount` decimal null,
     `Comments` varchar(300) null,
     
     `CreatedAt` DATETIME NOT NULL,

@@ -17,7 +17,7 @@ DROP procedure IF EXISTS `sp_get_bookingdetails`;
 DELIMITER $$
 CREATE PROCEDURE `sp_get_bookingdetails`()
 BEGIN
-	SELECT bd.Id, bd.BookedFrom, bd.LeaveAt, bd.Comments, gt.Name GuestName, rm.RoomNumber 
+	SELECT bd.Id, bd.BookedFrom, bd.LeaveAt, bd.PaidAmount, bd.Comments, gt.Name GuestName, gt.Id GuestId, rm.RoomNumber, rm.Id RoomId
     FROM `BookingDetails` bd
     left join `Guests` gt on bd.BookedBy = gt.Id
     inner join `Bookings` bk on bk.BookingId = bd.Id

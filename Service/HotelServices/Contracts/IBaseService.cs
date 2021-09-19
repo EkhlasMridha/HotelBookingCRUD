@@ -11,6 +11,7 @@ namespace Service.HotelServices.Contracts
         public Task<T> CreateAsync(T type);
         public Task<T> UpdateAsync(T type);
         public Task<T> GetASync(long id);
+        public Task<T> DeleteAsycn(long id);
         public Task<IEnumerable<T>> GetAllAsync();
 
         public IQueryable<T> GetAllAsQueryable();

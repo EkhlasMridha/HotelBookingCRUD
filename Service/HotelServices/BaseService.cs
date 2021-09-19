@@ -62,6 +62,14 @@ namespace Service.HotelServices
             await _unitOfWork.SaveChangesAsync();
             return type;
         }
+
+        public async Task<T> DeleteAsycn(long id)
+        {
+            var data = await GetASync(id);
+            _unitOfWork.Repository<T>().Delete(data);
+            await _unitOfWork.SaveChangesAsync();
+            return data;
+        }
         #endregion
     }
 }

@@ -25,9 +25,10 @@ namespace HotelBooking.Controllers
         }
         // GET: api/<BookingController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> GetAllBookings()
         {
-            return new string[] { "value1", "value2" };
+            var result = await _bookingService.GetAllBookings();
+            return Ok(result);
         }
 
         // GET api/<BookingController>/5
@@ -54,8 +55,9 @@ namespace HotelBooking.Controllers
 
         // DELETE api/<BookingController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task Delete(long id)
         {
+            await _bookingService.DeleteAsycn(id);
         }
     }
 }

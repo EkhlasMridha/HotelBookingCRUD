@@ -10,5 +10,6 @@ namespace Service.HotelServices.Contracts
     public interface IBookingService : IBaseService<BookingDetails>
     {
         public Task<BookingDetails> CreateBookingDataAsync(BookingDetails bookingDetails, long roomId);
+        public Task<List<BookingViewModel>> GetAllBookings();
     }
 }

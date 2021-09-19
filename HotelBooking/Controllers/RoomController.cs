@@ -76,14 +76,23 @@ namespace HotelBooking.Controllers
 
         // PUT api/<RoomController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> EditRoom(long id, [FromBody] RoomCreate roomUpdate)
         {
+            var room = await _roomService.GetASync(id);
+
+            room.RoomNumber = roomUpdate.RoomNumber;
+            room.Rent = roomUpdate.Rent;
+            room.Capacity = roomUpdate.Capacity;
+
+            var result = await _roomService.UpdateAsync(room);
+            return Ok(result);
         }
 
         // DELETE api/<RoomController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task Delete(long id)
         {
+            await _roomService.DeleteAsycn(id);
         }
     }
 }
