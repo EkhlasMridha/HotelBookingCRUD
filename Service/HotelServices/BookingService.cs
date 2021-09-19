@@ -63,26 +63,22 @@ namespace Service.HotelServices
         {
             try
             {
-                
-
-                await _unitOfWork.BeginTransactionAsync();
-
-                var booking = await GetASync(bookingView.Id);
-                booking.BookedBy = bookingView.BookedBy;
-                booking.BookedFrom = bookingView.BookedFrom;
-                booking.LeaveAt = bookingView.LeaveAt;
-                booking.PaidAmount = bookingView.PaidAmount;
-                booking.Comments = bookingView.Comments;
-                await UpdateAsync(booking);
-                var bookingLink = _unitOfWork.Repository<Booking>().AsQueryable().FirstOrDefault(a => a.BookingId == bookingView.Id && a.RoomId == prevRoom);
-                bookingLink.RoomId = bookingView.RoomId;
-                _unitOfWork.Repository<Booking>().Update(bookingLink);
-
-                await _unitOfWork.SaveChangesAsync();
-                await _unitOfWork.CommitAsync();
-            }catch(Exception e)
+                string spName = "sp_update_booking";
+                List<SqlParameter> parameters = new List<SqlParameter>()
+                {
+                    new SqlParameter("booking_id",bookingView.Id),
+                    new SqlParameter("prev_roomid",prevRoom),
+                    new SqlParameter("new_roomid",bookingView.RoomId),
+                    new SqlParameter("booked_from", bookingView.BookedFrom),
+                    new SqlParameter("leave_at", bookingView.LeaveAt),
+                    new SqlParameter("paid_amount", bookingView.PaidAmount),
+                    new SqlParameter("comments", bookingView.Comments)
+                };
+                await _unitOfWork.Repository<BookingDetails>().ExecuteSqlDataReader(spName, parameters);
+            }
+            catch(Exception e)
             {
-                await _unitOfWork.RollbackASync();
+                //await _unitOfWork.RollbackASync();
                 var ex = e;
                 throw;
             }

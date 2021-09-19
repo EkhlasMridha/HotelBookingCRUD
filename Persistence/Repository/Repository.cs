@@ -104,14 +104,15 @@ namespace Persistence.Repository
 
                 if(sqlParameters.Count != 0)
                 {
-                    var spParam = command.CreateParameter();
+                    
 
                     foreach (var param in sqlParameters)
                     {
+                        var spParam = command.CreateParameter();
                         spParam.ParameterName = param.ParameterName;
                         spParam.Value = param.Value;
+                        command.Parameters.Add(spParam);
                     }
-                    command.Parameters.Add(spParam);
                 }
                 
 

@@ -39,3 +39,22 @@ BEGIN
     order by rm.Rent asc;
 END$$
 DELIMITER ;
+
+DROP procedure IF EXISTS `sp_update_booking`;
+DELIMITER $$
+CREATE PROCEDURE `sp_update_booking`(in booking_id bigint, in prev_roomid bigint, in new_roomid bigint,
+ in booked_from datetime, in leave_at datetime,in paid_amount decimal, in comments varchar(300))
+BEGIN
+	update `BookingDetails` bkd
+    SET `BookedFrom` = booked_from,
+    `LeaveAt` = leave_at,
+    `PaidAmount` = paid_amount,
+    `Comments` = comments
+    where bkd.Id = booking_id;
+    
+    update `Bookings` bk
+    SET `RoomId` = new_roomid,
+    `UpdatedAt` = curdate()
+    where bk.RoomId = prev_roomid and bk.BookingId = booking_id;
+END$$
+DELIMITER ;
