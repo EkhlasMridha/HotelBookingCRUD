@@ -59,22 +59,20 @@ BEGIN
 END$$
 DELIMITER ;
 
-DROP procedure IF EXISTS `sp_update_booking`;
+DROP procedure IF EXISTS `sp_create_booking`;
 DELIMITER $$
-CREATE PROCEDURE `sp_update_booking`(in booking_id bigint, in prev_roomid bigint, in new_roomid bigint,
+CREATE PROCEDURE `sp_create_booking`(in room_id bigint, in guest_id bigint,
  in booked_from datetime, in leave_at datetime,in paid_amount decimal, in comments varchar(300))
 BEGIN
-	update `BookingDetails` bkd
-    SET `BookedFrom` = booked_from,
-    `LeaveAt` = leave_at,
-    `PaidAmount` = paid_amount,
-    `Comments` = comments
-    where bkd.Id = booking_id;
-    
-    update `Bookings` bk
-    SET `RoomId` = new_roomid,
-    `UpdatedAt` = curdate()
-    where bk.RoomId = prev_roomid and bk.BookingId = booking_id;
-END$$
-DELIMITER ;
+	declare booking_Id bigint default(0);
 
+	insert into BookingDetails (BookedFrom, LeaveAt, BookedBy,PaidAmount,Comments,CreatedAt)
+    values(booked_from,leave_at,guest_id,paid_amount,comments,curdate());
+    
+    set booking_id = last_insert_id();
+    select booking_id;
+    
+    insert into Bookings(BookingId,RoomId,CreatedAt)
+    values(booking_id,room_id,curdate());
+    select * from BookingDetails;
+END$$

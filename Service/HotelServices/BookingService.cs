@@ -23,20 +23,31 @@ namespace Service.HotelServices
         {
             try
             {
-                await _unitOfWork.BeginTransactionAsync();
-                var result = await CreateAsync(bookingDetails);
-                var booking = new Booking();
-                booking.BookingId = result.Id;
-                booking.RoomId = roomId;
-                await _unitOfWork.Repository<Booking>().InsertAsync(booking);
-                await _unitOfWork.SaveChangesAsync();
+                string spName = "sp_create_booking";
+                List<SqlParameter> parameters = new List<SqlParameter>()
+                {
+                    new SqlParameter("room_id",roomId),
+                    new SqlParameter("guest_id",bookingDetails.BookedBy),
+                    new SqlParameter("booked_from",bookingDetails.BookedFrom),
+                    new SqlParameter("leave_at", bookingDetails.LeaveAt),
+                    new SqlParameter("paid_amount",bookingDetails.PaidAmount),
+                    new SqlParameter("comments",bookingDetails.Comments)
+                };
+                var data = await _unitOfWork.Repository<BookingDetails>().ExecuteSqlDataReader(spName, parameters);
+                return bookingDetails;
+                //await _unitOfWork.BeginTransactionAsync();
+                //var result = await CreateAsync(bookingDetails);
+                //var booking = new Booking();
+                //booking.BookingId = result.Id;
+                //booking.RoomId = roomId;
+                //await _unitOfWork.Repository<Booking>().InsertAsync(booking);
+                //await _unitOfWork.SaveChangesAsync();
 
-                await _unitOfWork.CommitAsync();
-                return result;
+                //await _unitOfWork.CommitAsync();
+                //return result;
             }
             catch(Exception ex)
             {
-                await _unitOfWork.RollbackASync();
                 var e = ex;
                 throw;
             }
