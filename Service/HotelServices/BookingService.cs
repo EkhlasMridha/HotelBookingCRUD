@@ -78,7 +78,6 @@ namespace Service.HotelServices
             }
             catch(Exception e)
             {
-                //await _unitOfWork.RollbackASync();
                 var ex = e;
                 throw;
             }
